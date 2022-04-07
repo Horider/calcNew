@@ -5,7 +5,6 @@ class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите математическое выражение с символами от 1 до 10 или два римских числа от I до X");
         String inputString = scanner.nextLine().toUpperCase();
         System.out.println(Main.calc(inputString));
     }
@@ -24,11 +23,9 @@ class Main {
             stable2 = splitNumbers[1].trim();
         } catch (ArrayIndexOutOfBoundsException e){
             System.out.println("Ошибка : " + e);
-            System.out.println("Неполноценное математическое выражение");
         }
 
         if (splitNumbers.length > 2) {
-            System.out.println("Больше 2х чисел");
             return null;
         } else
             Numbers = Arrays.copyOf(splitNumbers, 2);
@@ -47,7 +44,6 @@ class Main {
                 return CalculatorHelper.calculatorRome(number1, number2, operation);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Ошибка : " + e);
-                System.out.println("Отрицательных Римских чисел нет");
             }
 
         } else {
@@ -56,12 +52,13 @@ class Main {
                 number2 = Integer.parseInt(stable2);
             } catch (NumberFormatException e) {
                 System.out.println("Ошибка : " + e);
-                System.out.println("Неверный формат данных");
             }
             if ((number1 >= 0 && number1 <= 10) && (number2 >= 0 && number2 <= 10)) {
                 return answer = String.valueOf(CalculatorHelper.calculated(number1, number2, operation));
             } else
                 System.out.println("Неверный формат данных");
-        } return null;
+        }
+        return null;
     }
 }
+
