@@ -26,7 +26,7 @@ class CalculatorHelper {
                 case "X" -> {return 10;}
             }
         } catch (InputMismatchException e) {
-            throw new InputMismatchException("Неверный формат данных");
+            throw new InputMismatchException();
         } return -1;
     }
 
@@ -42,9 +42,9 @@ class CalculatorHelper {
             case '/':
                 try {
                     return num1 / num2;
-                } catch (ArithmeticException | InputMismatchException e) {
-                    System.out.println("Ошибка : " + e);
-                } break;
+                } catch (ArithmeticException e) {
+                    throw new ArithmeticException();
+                }
         } return 0;
     }
 

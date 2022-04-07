@@ -11,9 +11,9 @@ class Main {
 
     public static String calc (String inputString) {
         int number1 = 0, number2 = 0;
-        String stable1 = null, stable2 = null, answer = null;
+        String stable1 = null, stable2 = null;
         String[] splitNumbers;
-        String[] Numbers = new String[2];
+        String[] Numbers;
         char operation;
 
         operation = CalculatorHelper.underChar(inputString);
@@ -22,18 +22,18 @@ class Main {
             stable1 = splitNumbers[0].trim();
             stable2 = splitNumbers[1].trim();
         } catch (ArrayIndexOutOfBoundsException e){
-            System.out.println("Ошибка : " + e);
+            throw new ArrayIndexOutOfBoundsException();
         }
 
-        if (splitNumbers.length > 2) {
-            return null;
-        } else
+        if (splitNumbers.length > 2)
+            throw new ArrayIndexOutOfBoundsException();
+        else
             Numbers = Arrays.copyOf(splitNumbers, 2);
         try {
             stable1 = Numbers[0].trim();
             stable2 = Numbers[1].trim();
         } catch (NullPointerException e) {
-            System.out.println("Ошибка : " + e);
+            throw new NullPointerException();
         }
 
         // Производится вычесление взависимости от формата вводимых чисел
@@ -43,7 +43,7 @@ class Main {
             try {
                 return CalculatorHelper.calculatorRome(number1, number2, operation);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Ошибка : " + e);
+                throw new ArrayIndexOutOfBoundsException();
             }
 
         } else {
@@ -51,14 +51,13 @@ class Main {
                 number1 = Integer.parseInt(stable1);
                 number2 = Integer.parseInt(stable2);
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка : " + e);
+                throw new NumberFormatException();
             }
-            if ((number1 >= 0 && number1 <= 10) && (number2 >= 0 && number2 <= 10)) {
-                return answer = String.valueOf(CalculatorHelper.calculated(number1, number2, operation));
-            } else
-                System.out.println("Неверный формат данных");
+            if ((number1 <= 0 || number1 > 10) || (number2 <= 0 || number2 > 10))
+                throw new ArrayIndexOutOfBoundsException();
+            else
+                return String.valueOf(CalculatorHelper.calculated(number1, number2, operation));
         }
-        return null;
     }
 }
 
