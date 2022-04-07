@@ -50,9 +50,11 @@ class CalculatorHelper {
 
     // Метод производит вычесление для Римских цифр
     static String calculatorRome (int number1, int number2, char operation){
+        int answerInt;
         String answer = null;
         if (number1 > 0 && number2 > 0) {
-            answer = String.valueOf(CalculatorHelper.calculated(number1, number2, operation));
+            answerInt = CalculatorHelper.calculated(number1, number2, operation);
+            answer = CalculatorHelper.ROMAN[answerInt];
         }
         return answer;
     }

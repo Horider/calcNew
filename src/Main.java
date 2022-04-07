@@ -7,6 +7,7 @@ class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите математическое выражение с символами от 1 до 10 или два римских числа от I до X");
         String inputString = scanner.nextLine().toUpperCase();
+        System.out.println(Main.calc(inputString));
     }
 
     public static String calc (String inputString) {
@@ -19,6 +20,14 @@ class Main {
 
         operation = CalculatorHelper.underChar(inputString);
         splitNumbers = inputString.split("[+-/*]");
+        try{
+            stable1 = splitNumbers[0].trim();
+            stable2 = splitNumbers[1].trim();
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Ошибка : " + e);
+            System.out.println("Неполноценное математическое выражение");
+        }
+
         if (splitNumbers.length > 2) {
             System.out.println("Больше 2х чисел");
             return null;
@@ -27,14 +36,12 @@ class Main {
         try {
             stable1 = Numbers[0].trim();
             stable2 = Numbers[1].trim();
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (NullPointerException e) {
             System.out.println("Ошибка : " + e);
-            System.out.println("Неполноценное математическое выражение");
         }
 
         // Производится вычесление взависимости от формата вводимых чисел
         if (Arrays.asList(CalculatorHelper.ROMAN).contains(stable1) && Arrays.asList(CalculatorHelper.ROMAN).contains(stable2)) {
-            System.out.println("Римские вычесления");
             number1 = CalculatorHelper.convertRomanToArab(stable1);
             number2 = CalculatorHelper.convertRomanToArab(stable2);
             try {
@@ -46,7 +53,6 @@ class Main {
             return answer;
 
         } else {
-            System.out.println("Арабские вычесления");
             try {
                 number1 = Integer.parseInt(stable1);
                 number2 = Integer.parseInt(stable2);
