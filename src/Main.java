@@ -17,7 +17,6 @@ class Main {
         String[] Numbers = new String[2];
         char operation;
 
-
         operation = CalculatorHelper.underChar(inputString);
         splitNumbers = inputString.split("[+-/*]");
         try{
@@ -45,12 +44,11 @@ class Main {
             number1 = CalculatorHelper.convertRomanToArab(stable1);
             number2 = CalculatorHelper.convertRomanToArab(stable2);
             try {
-                answer = CalculatorHelper.calculatorRome(number1, number2, operation);
+                return CalculatorHelper.calculatorRome(number1, number2, operation);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Ошибка : " + e);
                 System.out.println("Отрицательных Римских чисел нет");
             }
-            return answer;
 
         } else {
             try {
@@ -61,11 +59,9 @@ class Main {
                 System.out.println("Неверный формат данных");
             }
             if ((number1 >= 0 && number1 <= 10) && (number2 >= 0 && number2 <= 10)) {
-                answer = String.valueOf(CalculatorHelper.calculated(number1, number2, operation));
+                return answer = String.valueOf(CalculatorHelper.calculated(number1, number2, operation));
             } else
                 System.out.println("Неверный формат данных");
-        } return answer;
+        } return null;
     }
 }
-
-
